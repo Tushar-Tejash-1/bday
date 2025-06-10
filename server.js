@@ -1,27 +1,35 @@
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// CORS headers middleware
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
 });
 
+// Handle preflight OPTIONS request for /send-message
 app.options('/send-message', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.sendStatus(200);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.sendStatus(200);
 });
 
+// POST endpoint to save messages
 app.post('/send-message', (req, res) => {
   const { message } = req.body;
 
@@ -30,7 +38,6 @@ app.post('/send-message', (req, res) => {
   }
 
   const entry = `${new Date().toISOString()} - ${message}\n`;
-
   const filePath = path.join(__dirname, 'messages.txt');
 
   fs.appendFile(filePath, entry, (err) => {
@@ -43,9 +50,7 @@ app.post('/send-message', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+// GET endpoint to read messages
 app.get('/messages', (req, res) => {
   const filePath = path.join(__dirname, 'messages.txt');
 
@@ -60,6 +65,12 @@ app.get('/messages', (req, res) => {
   });
 });
 
+// Serve index.html on root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Start server
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });

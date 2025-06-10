@@ -7,14 +7,49 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap');
 
-.gift-box {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  margin-top: 40px;
-  cursor: pointer;
-  animation: shake 1.5s infinite;
-}
+    .gift-box {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-top: 40px;
+      cursor: pointer;
+      animation: shake 1.5s infinite;
+    }
+    .lid {
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+    .gift-box::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      width: 80%;
+      height: 10px;
+      background: #d94c68;
+      border-radius: 5px;
+      transform: translateY(-50%);
+      z-index: 4;
+    }
+    .lid, .box {
+      border: 2px solid #c76b7a; /* darker pink border */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    .lid {
+      background: linear-gradient(135deg, #ee9ca7, #d94c68);
+      box-shadow: 0 5px 15px rgba(217, 76, 104, 0.7);
+    }
+    .gift-box::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      width: 10px;
+      height: 80%;
+      background: #d94c68;
+      border-radius: 5px;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
     .box-content {
       position: absolute;
       top: 50%;
@@ -27,53 +62,45 @@
       z-index: 3;
       display: none; /* Hide initially */
     }
-
-.lid, .box {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.lid {
-  background: #ee9ca7;
-  height: 30px;
-  top: 0;
-  z-index: 2;
-  transition: all 0.6s ease;
-}
-
+    .lid, .box {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .lid {
+      background: #ee9ca7;
+      height: 30px;
+      top: 0;
+      z-index: 2;
+      transition: all 0.6s ease;
+    }
     .box {
       top: 30px;
       height: calc(100% - 30px);
       background: #ffc3d1;
     }
-
-
-.click-me {
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  text-align: center;
-  margin-top: 140px;
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes shake {
-  0%, 100% { transform: rotate(0); }
-  25% { transform: rotate(2deg); }
-  50% { transform: rotate(-2deg); }
-  75% { transform: rotate(1deg); }
-}
-
+    .click-me {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+      margin-top: 140px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes shake {
+      0%, 100% { transform: rotate(0); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+      75% { transform: rotate(1deg); }
+    }
     body {
       margin: 0;
       font-family: 'Great Vibes', cursive;
       background: linear-gradient(to top right, #ffdde1, #ee9ca7);
       overflow-x: hidden;
     }
-
     .container {
       display: flex;
       flex-direction: column;
@@ -84,13 +111,11 @@
       padding: 40px 20px;
       position: relative;
     }
-
     h1 {
       font-size: 3em;
       color: #fff;
       animation: fadeInDown 2s ease-out forwards;
     }
-
     .open-btn {
       margin-top: 30px;
       padding: 15px 30px;
@@ -103,12 +128,10 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, background-color 0.3s ease;
     }
-
     .open-btn:hover {
       background-color: #ffe3ec;
       transform: scale(1.05);
     }
-
     .media-gallery {
       display: none;
       flex-wrap: wrap;
@@ -117,7 +140,6 @@
       margin-top: 30px;
       animation: fadeIn 1.5s ease-out forwards;
     }
-
     .media-item {
       width: 360px;
       height: 640px;
@@ -125,68 +147,62 @@
       border-radius: 20px;
       overflow: hidden;
     }
-
     .media-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .message {
-  margin-top: 40px;
-  font-size: 1.6em;
-  color: white;
-  padding: 0 20px;
-  font-family: 'Poppins', sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid rgba(255,255,255,0.75);
-  animation: typing 5s steps(45, end), blink 0.75s step-end infinite;
-  width: 0;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-.typing-container {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.typing-line {
-  font-size: 1.3em;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid rgba(255,255,255,0.75);
-  width: 0;
-  animation: typing steps(45, end), blink 0.75s step-end infinite;
-  animation-fill-mode: forwards;
-}
-
-.typing-line:nth-child(1) { animation-duration: 3s; animation-delay: 0s; }
-.typing-line:nth-child(2) { animation-duration: 3s; animation-delay: 3s; }
-.typing-line:nth-child(3) { animation-duration: 3s; animation-delay: 6s; }
-.typing-line:nth-child(4) { animation-duration: 3s; animation-delay: 9s; }
-.typing-line:nth-child(5) { animation-duration: 3s; animation-delay: 12s; }
-.typing-line:nth-child(6) { animation-duration: 3s; animation-delay: 15s; }
-.typing-line:nth-child(7) { animation-duration: 3s; animation-delay: 18s; }
-.typing-line:nth-child(8) { animation-duration: 3s; animation-delay: 21s; }
-
-
+      margin-top: 40px;
+      font-size: 1.6em;
+      color: white;
+      padding: 0 20px;
+      font-family: 'Poppins', sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid rgba(255,255,255,0.75);
+      animation: typing 5s steps(45, end), blink 0.75s step-end infinite;
+      width: 0;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .typing-container {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .typing-line {
+      font-size: 1.3em;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid rgba(255,255,255,0.75);
+      width: 0;
+      animation-name: typing, blink;
+      animation-timing-function: steps(45, end), step-end;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1, infinite;
+    }
+    .typing-line:nth-child(1) { animation-duration: 3s, 0.75s; animation-delay: 0s, 3s; }
+    .typing-line:nth-child(2) { animation-duration: 3s, 0.75s; animation-delay: 3s, 6s; }
+    .typing-line:nth-child(3) { animation-duration: 3s, 0.75s; animation-delay: 6s, 9s; }
+    .typing-line:nth-child(4) { animation-duration: 3s, 0.75s; animation-delay: 9s, 12s; }
+    .typing-line:nth-child(5) { animation-duration: 3s, 0.75s; animation-delay: 12s, 15s; }
+    .typing-line:nth-child(6) { animation-duration: 3s, 0.75s; animation-delay: 15s, 18s; }
+    .typing-line:nth-child(7) { animation-duration: 3s, 0.75s; animation-delay: 18s, 21s; }
+    .typing-line:nth-child(8) { animation-duration: 3s, 0.75s; animation-delay: 21s, 24s; }
     .private-note {
       margin-top: 60px;
       text-align: center;
-      width: 100%;}
-
+      width: 100%;
+    }
     textarea {
       width: 90%;
       max-width: 600px;
@@ -198,7 +214,6 @@
       border: none;
       resize: none;
     }
-
     .save-btn {
       margin-top: 10px;
       padding: 10px 20px;
@@ -210,11 +225,9 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-
     .save-btn:hover {
       background: #ffe3ec;
     }
-
     .hearts {
       position: fixed;
       top: 0;
@@ -224,7 +237,6 @@
       pointer-events: none;
       z-index: 1;
     }
-
     .heart {
       position: absolute;
       width: 20px;
@@ -233,7 +245,6 @@
       transform: rotate(45deg);
       animation: floatHearts 10s linear infinite;
     }
-
     .heart::before,
     .heart::after {
       content: '';
@@ -243,32 +254,26 @@
       background: red;
       border-radius: 50%;
     }
-
     .heart::before {
       top: -10px;
       left: 0;
     }
-
     .heart::after {
       left: -10px;
       top: 0;
     }
-
     @keyframes fadeInDown {
       from { transform: translateY(-50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     @keyframes fadeInUp {
       from { transform: translateY(50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     @keyframes floatHearts {
       0% {
         transform: translateY(100vh) rotate(0deg);
@@ -282,7 +287,6 @@
         opacity: 0;
       }
     }
-
     /* Responsive Layout */
     @media (max-width: 768px) {
       h1 {
@@ -307,36 +311,36 @@
   <div class="container">
     <h1>Happy Birthday, Simi Chan ❤️</h1>
     <div class="gift-box" onclick="openGift()">
-  <div class="lid"></div>
-  <div class="box"></div>
+      <div class="lid"></div>
+      <div class="box"></div>
+    <p class="click-me">Click to Open 🎁</p>
+    </div>
       <div class="box-content" id="giftContent">
-        <p>🎁 Surprise! I love you! 💖</p>
       </div>
-  <p class="click-me">Click to Open 🎁</p>
-</div>
+    </div>
 
     <div class="media-gallery" id="gallery">
-      <div class="media-item"><img src="IMG20231115193122.jpg" alt="gift1"></div>
-      <div class="media-item"><img src="IMG_20230601_090733_926.jpg" alt="gift2"></div>
-      <div class="media-item"><img src="Snapchat-1331151446.jpg" alt="gift3"></div>
-      <div class="media-item"><img src="IMG-20241222-WA0012.jpg" alt="gift4"></div>
-      <div class="media-item"><img src="Snapchat-985315476.jpg" alt="gift5"></div>
-      <div class="media-item"><img src="WhatsApp Image 2024-11-25 at 22.39.13_42951b4e.jpg" alt="gift6"></div>
-      <div class="media-item"><img src="IMG-20241129-WA0019.jpg" alt="gift7"></div>
-      <div class="media-item"><img src="IMG-20241222-WA0016.jpg" alt="gift8"></div>
-      <div class="media-item"><img src="Snapchat-1767384438.jpg" alt="gift9"></div>
+      <div class="media-item"><img src="public/IMG20231115193122.jpg" alt="gift1"></div>
+      <div class="media-item"><img src="public/IMG_20230601_090733_926.jpg" alt="gift2"></div>
+      <div class="media-item"><img src="public/Snapchat-1331151446.jpg" alt="gift3"></div>
+      <div class="media-item"><img src="public/IMG-20241222-WA0012.jpg" alt="gift4"></div>
+      <div class="media-item"><img src="public/Snapchat-985315476.jpg" alt="gift5"></div>
+      <div class="media-item"><img src="public/WhatsApp Image 2024-11-25 at 22.39.13_42951b4e.jpg" alt="gift6"></div>
+      <div class="media-item"><img src="public/IMG-20241129-WA0019.jpg" alt="gift7"></div>
+      <div class="media-item"><img src="public/IMG-20241222-WA0016.jpg" alt="gift8"></div>
+      <div class="media-item"><img src="public/Snapchat-1767384438.jpg" alt="gift9"></div>
     </div>
-    <div class="typing-container" id="typingContainer">
-  <div class="typing-line">Happy Birthday, beautiful 💋</div>
-  <div class="typing-line">You are the trouble I’d choose every lifetime,</div>
-  <div class="typing-line">A spark in my calm, a rhythm, a rhyme.</div>
-  <div class="typing-line">Your smile’s my favorite kind of mess,</div>
-  <div class="typing-line">My heart beats louder when you say yes.</div>
-  <div class="typing-line">So blow your candles, make your wish—</div>
-  <div class="typing-line">But know this boy is already yours, dish by dish. 😘✨</div>
-  <div class="typing-line">Here’s to your smile, your soul, and the love we share. 🎉💖</div>
-</div>
 
+    <div class="typing-container" id="typingContainer">
+      <div class="typing-line">Happy Birthday, beautiful 💋</div>
+      <div class="typing-line">You are the trouble I’d choose every lifetime,</div>
+      <div class="typing-line">A spark in my calm, a rhythm, a rhyme.</div>
+      <div class="typing-line">Your smile’s my favorite kind of mess,</div>
+      <div class="typing-line">My heart beats louder when you say yes.</div>
+      <div class="typing-line">So blow your candles, make your wish—</div>
+      <div class="typing-line">But know this boy is already yours, dish by dish. 😘✨</div>
+      <div class="typing-line">Here’s to your smile, your soul, and the love we share. 🎉💖</div>
+    </div>
 
     <div class="private-note">
       <h2 style="color:white;">Write a message💌</h2>
@@ -344,48 +348,39 @@
       <br />
       <button class="save-btn" onclick="saveNote()">Post a message</button>
     </div>
+
+    <!-- Add this div to display fetched messages -->
+    <div id="allMessages" style="margin-top: 40px; color: white; font-family: 'Poppins', sans-serif;"></div>
   </div>
 
   <audio id="bg-music" loop>
-  <source src="joji%20-%20you%20suck%20charlie.mp3" type="audio/mpeg" />
-</audio>
+    <source src="public/joji_-_you_suck_charlie.mp3" type="audio/mpeg">
 
-  <script>
+
+  </audio>
+
+  <script defer>
     function openGift() {
-  const lid = document.querySelector('.lid');
-  lid.style.transform = 'rotate(-45deg) translateY(-60px)';
-  lid.style.opacity = '0';
-  lid.style.pointerEvents = 'none';
-  document.querySelector('.gift-box').style.animation = 'none';
+      const lid = document.querySelector('.lid');
+      lid.style.transform = 'rotate(-45deg) translateY(-60px)';
+      lid.style.opacity = '0';
+      lid.style.pointerEvents = 'none';
+      document.querySelector('.gift-box').style.animation = 'none';
       document.getElementById('giftContent').style.display='block';
 
-  // Reveal gallery and play music
-  setTimeout(() => {
-    document.getElementById('gallery').style.display = 'flex';
-    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+      // Reveal gallery and play music
+      setTimeout(() => {
+        document.getElementById('gallery').style.display = 'flex';
+        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
 
-    const audio = document.getElementById('bg-music');
-    if (audio.paused) {
-      audio.play().catch(() => {
-        console.log('Audio play blocked');
-      });
+        const audio = document.getElementById('bg-music');
+        if (audio.paused) {
+          audio.play().catch(() => {
+            console.log('Audio play blocked');
+          });
+        }
+      }, 600);
     }
-  }, 600);
-}
-
-   function revealGallery() {
-  const gallery = document.getElementById('gallery');
-  gallery.style.display = 'flex';
-
-  const audio = document.getElementById('bg-music');
-  if (audio.paused) {
-    audio.play().catch(() => {
-      console.log('Audio play was prevented by browser');
-    });
-  }
-}
-    gallery.scrollIntoView({ behavior: 'smooth' });
-
 
     function saveNote() {
       const note = document.getElementById('userMessage').value.trim();
@@ -395,23 +390,22 @@
       }
 
       // CHANGE THIS URL to your deployed server URL or localhost during testing
-      const serverUrl = 'https://e6744cd9-db65-42d6-a719-7049351eea56-00-5x6b7ujq4vwz.sisko.replit.dev/send-message';
-
+      const serverUrl = 'https://e6744cd9-db65-42d6-a719-7049351eea56-00-5x6b7ujq4vwz.sisko.replit.dev/';
 
       fetch(serverUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: note }),
       })
-        .then((response) => response.text())
-        .then((data) => {
-          alert('Message sent successfully!');
-          document.getElementById('userMessage').value = '';
-        })
-        .catch((error) => {
-          alert('Failed to send message.');
-          console.error(error);
-        });
+      .then((response) => response.text())
+      .then((data) => {
+        alert('Message sent successfully!');
+        document.getElementById('userMessage').value = '';
+      })
+      .catch((error) => {
+        alert('Failed to send message.');
+        console.error(error);
+      });
     }
 
     function createHeart() {
@@ -424,21 +418,22 @@
     }
 
     setInterval(createHeart, 300);
+
     function fetchMessages() {
-      fetch('https://e6744cd9-db65-42d6-a719-7049351eea56-00-5x6b7ujq4vwz.sisko.replit.dev/messages')
+      fetch('https://e6744cd9-db65-42d6-a719-7049351eea56-00-5x6b7ujq4vwz.sisko.replit.dev/')
         .then((response) => response.text())
         .then((data) => {
           const messagesDiv = document.getElementById('allMessages');
-          messagesDiv.textContent = data || "No messages yet.";
+          if (messagesDiv) {
+            messagesDiv.textContent = data || "No messages yet.";
+          }
         })
         .catch((error) => {
           console.error('Failed to fetch messages:', error);
         });
     }
 
-    // Fetch messages every time the page loads
     window.onload = fetchMessages;
-
   </script>
 </body>
 </html>
