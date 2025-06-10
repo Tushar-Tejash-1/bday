@@ -372,17 +372,27 @@
 
         const audio = document.getElementById('bg-music');
         audio.volume = 0.3; // Set volume to 30%
-        audio.play().catch((error) => {
-          console.log('Audio play blocked by browser:', error);
-          // Show a small prompt to enable audio
-          const playBtn = document.createElement('button');
-          playBtn.textContent = '🎵 Click to play music';
-          playBtn.style.cssText = 'position:fixed;top:20px;right:20px;padding:10px;background:#fff;border:none;border-radius:20px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:1000;';
-          playBtn.onclick = () => {
-            audio.play();
-            playBtn.remove();
-          };
-          document.body.appendChild(playBtn);
+        
+        // Try to play audio
+        const playAudio = () => {
+          audio.play().catch((error) => {
+            console.log('Audio play blocked by browser:', error);
+            // Show a small prompt to enable audio
+            const playBtn = document.createElement('button');
+            playBtn.textContent = '🎵 Click to play music';
+            playBtn.style.cssText = 'position:fixed;top:20px;right:20px;padding:10px;background:#fff;border:none;border-radius:20px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:1000;';
+            playBtn.onclick = () => {
+              audio.play();
+              playBtn.remove();
+            };
+            document.body.appendChild(playBtn);
+          });
+        };
+        
+        // Check if audio file exists before trying to play
+        audio.addEventListener('canplaythrough', playAudio);
+        audio.addEventListener('error', (e) => {
+          console.log('Audio file not found or failed to load:', e);
         });
       }, 600);
     }
