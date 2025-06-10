@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday My Love</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap');
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: pink;
+      font-family: 'Great Vibes', cursive;
+      background: linear-gradient(to top right, #ffdde1, #ee9ca7);
       overflow-x: hidden;
     }
 
-    .card {
-      width: 90%;
-      max-width: 500px;
-      margin: 100px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      text-align: center;
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* This centers children (like h1, gift-box) horizontally */
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center; /* This centers inline-block and text content */
+      padding: 40px 20px;
+      position: relative;
     }
 
-    @media (max-width: 600px) {
-      .card {
-        margin: 50px 10px;
-        font-size: 16px;
-      }
+    h1 {
+      font-size: 3em;
+      color: #fff;
+      animation: fadeInDown 2s ease-out forwards;
     }
 
     .gift-box {
@@ -56,7 +55,7 @@
       z-index: 4;
     }
     .lid, .box {
-      border: 2px solid #c76b7a; /* darker pink border */
+      border: 2px solid #c76b7a;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
     .lid {
@@ -85,7 +84,7 @@
       font-size: 1.1em;
       text-align: center;
       z-index: 3;
-      display: none; /* Hide initially */
+      display: none;
     }
     .lid, .box {
       position: absolute;
@@ -120,27 +119,7 @@
       50% { transform: rotate(-2deg); }
       75% { transform: rotate(1deg); }
     }
-    body {
-      margin: 0;
-      font-family: 'Great Vibes', cursive;
-      background: linear-gradient(to top right, #ffdde1, #ee9ca7);
-      overflow-x: hidden;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
-    }
-    h1 {
-      font-size: 3em;
-      color: #fff;
-      animation: fadeInDown 2s ease-out forwards;
-    }
+
     .open-btn {
       margin-top: 30px;
       padding: 15px 30px;
@@ -157,26 +136,38 @@
       background-color: #ffe3ec;
       transform: scale(1.05);
     }
+
     .media-gallery {
       display: none;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+      flex-wrap: wrap; /* Allows items to wrap to next line if space is insufficient */
+      gap: 20px; /* Space between images */
+      justify-content: center; /* Centers the images horizontally */
       margin-top: 30px;
       animation: fadeIn 1.5s ease-out forwards;
+      /* Calculate max-width for 3 images (360px each) + 2 gaps (20px each) + some padding */
+      max-width: calc(3 * 360px + 2 * 20px + 40px); /* 1080px + 40px + 40px = 1160px */
+      /* Max-width must be large enough for 3 images plus their gaps */
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px; /* Padding for the gallery itself */
     }
+
     .media-item {
-      width: 360px;
-      height: 640px;
+      width: 360px; /* Fixed width for each image */
+      height: 640px; /* Fixed height for each image */
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       border-radius: 20px;
       overflow: hidden;
+      flex-shrink: 0; /* Prevent items from shrinking */
+      /* flex-grow: 1; If you want them to expand to fill space within the row */
+      /* flex-basis: 360px; Can be used in conjunction with flex-grow */
     }
     .media-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .message {
       margin-top: 40px;
       font-size: 1.6em;
@@ -196,12 +187,15 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
+
     .typing-container {
       margin-top: 40px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      align-items: center;
     }
+
     .typing-line {
       font-size: 1.3em;
       color: white;
@@ -209,12 +203,19 @@
       white-space: nowrap;
       overflow: hidden;
       border-right: 2px solid rgba(255,255,255,0.75);
-      width: 0;
-      animation-name: typing, blink;
+      max-width: 0; /* Start with 0 width */
+      text-align: center; /* Center the text within the line */
+      animation-name: typing-center, blink;
       animation-timing-function: steps(45, end), step-end;
       animation-fill-mode: forwards;
       animation-iteration-count: 1, infinite;
     }
+
+    @keyframes typing-center {
+      from { max-width: 0; }
+      to { max-width: 70ch; /* Adjust based on your longest line content */ }
+    }
+
     .typing-line:nth-child(1) { animation-duration: 3s, 0.75s; animation-delay: 0s, 3s; }
     .typing-line:nth-child(2) { animation-duration: 3s, 0.75s; animation-delay: 3s, 6s; }
     .typing-line:nth-child(3) { animation-duration: 3s, 0.75s; animation-delay: 6s, 9s; }
@@ -223,10 +224,14 @@
     .typing-line:nth-child(6) { animation-duration: 3s, 0.75s; animation-delay: 15s, 18s; }
     .typing-line:nth-child(7) { animation-duration: 3s, 0.75s; animation-delay: 18s, 21s; }
     .typing-line:nth-child(8) { animation-duration: 3s, 0.75s; animation-delay: 21s, 24s; }
+
     .private-note {
       margin-top: 60px;
       text-align: center;
       width: 100%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     textarea {
       width: 90%;
@@ -312,23 +317,6 @@
         opacity: 0;
       }
     }
-    /* Responsive Layout */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2em;
-      }
-      .media-item {
-        width: 90vw;
-        height: auto;
-      }
-      .message {
-        font-size: 1.3em;
-      }
-      .open-btn {
-        font-size: 1.2em;
-        padding: 12px 24px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -343,18 +331,17 @@
       <div class="box-content" id="giftContent">
       </div>
     </div>
-
-    <div class="media-gallery" id="gallery">
-      <div class="media-item"><img src="IMG20231115193122.jpg" alt="gift1"></div>
-      <div class="media-item"><img src="IMG_20230601_090733_926.jpg" alt="gift2"></div>
-      <div class="media-item"><img src="Snapchat-1331151446.jpg" alt="gift3"></div>
-      <div class="media-item"><img src="IMG-20241222-WA0012.jpg" alt="gift4"></div>
-      <div class="media-item"><img src="Snapcht-985315476.jpg" alt="gift5"></div>
-      <div class="media-item"><img src="WhatsApp Image 2024-11-25 at 22.39.13_42951b4e.jpg" alt="gift6"></div>
-      <div class="media-item"><img src="IMG-20241129-WA0019.jpg" alt="gift7"></div>
-      <div class="media-item"><img src="IMG-20241222-WA0016.jpg" alt="gift8"></div>
-      <div class="media-item"><img src="Snapchat-1767384438.jpg" alt="gift9"></div>
-    </div>
+  <div id="gallery" class="media-gallery">
+    <div class="media-item"><img src="IMG20231115193122.jpg" alt="gift1"></div>
+    <div class="media-item"><img src="IMG_20230601_090733_926.jpg" alt="gift2"></div>
+    <div class="media-item"><img src="Snapchat-1331151446.jpg" alt="gift3"></div>
+    <div class="media-item"><img src="IMG-20241222-WA0012.jpg" alt="gift4"></div>
+    <div class="media-item"><img src="Snapchat-985315476.jpg" alt="gift5"></div>
+    <div class="media-item"><img src="WhatsApp Image 2024-11-25 at 22.39.13_42951b4e.jpg" alt="gift6"></div>
+    <div class="media-item"><img src="IMG-20241129-WA0019.jpg" alt="gift7"></div>
+    <div class="media-item"><img src="IMG-20241222-WA0016.jpg" alt="gift8"></div>
+    <div class="media-item"><img src="Snapchat-1767384438.jpg" alt="gift9"></div>
+  </div>
 
     <div class="typing-container" id="typingContainer">
       <div class="typing-line">Happy Birthday, beautiful 💋</div>
@@ -374,7 +361,7 @@
       <button class="save-btn" onclick="saveNote()">Post a message</button>
     </div>
 
-    
+
   </div>
   <audio id="bg-music" loop>
     <source src="joji.mp3" type="audio/mpeg">
@@ -390,19 +377,16 @@
       document.querySelector('.gift-box').style.animation = 'none';
       document.getElementById('giftContent').style.display='block';
 
-      // Reveal gallery and play music
       setTimeout(() => {
         document.getElementById('gallery').style.display = 'flex';
         document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
 
         const audio = document.getElementById('bg-music');
-        audio.volume = 0.3; // Set volume to 30%
-        
-        // Try to play audio
+        audio.volume = 0.3;
+
         const playAudio = () => {
           audio.play().catch((error) => {
             console.log('Audio play blocked by browser:', error);
-            // Show a small prompt to enable audio
             const playBtn = document.createElement('button');
             playBtn.textContent = '🎵 Click to play music';
             playBtn.style.cssText = 'position:fixed;top:20px;right:20px;padding:10px;background:#fff;border:none;border-radius:20px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.2);z-index:1000;';
@@ -413,31 +397,32 @@
             document.body.appendChild(playBtn);
           });
         };
-        
-        // Test if audio file exists
+
         fetch('joji.mp3')
           .then(response => {
             if (response.ok) {
-              console.log('Audio file found!');
+              console.log('Audio file found on server!');
+              playAudio(); 
             } else {
               console.error('Audio file not found - response status:', response.status);
+              alert('Background music could not be loaded. (File not found)');
             }
           })
-          .catch(error => console.error('Error checking audio file:', error));
+          .catch(error => {
+            console.error('Error checking audio file path (network error or CORS):', error);
+            alert('Could not check background music file. (Network or CORS issue)');
+          });
 
-        // Add more detailed audio debugging
         audio.addEventListener('loadstart', () => console.log('Audio: Load started'));
         audio.addEventListener('loadeddata', () => console.log('Audio: Data loaded'));
         audio.addEventListener('canplaythrough', () => {
           console.log('Audio: Can play through');
-          playAudio();
         });
         audio.addEventListener('error', (e) => {
           console.error('Audio error:', e);
           console.error('Audio error details:', audio.error);
         });
-        
-        // Try to load the audio
+
         audio.load();
       }, 600);
     }
@@ -449,7 +434,6 @@
         return;
       }
 
-      // Use relative URL to work with current deployment
       fetch('/send-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -477,7 +461,6 @@
 
     setInterval(createHeart, 300);
 
-    
   </script>
 </body>
 </html>
