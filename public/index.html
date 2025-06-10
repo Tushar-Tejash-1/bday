@@ -424,10 +424,8 @@
         return;
       }
 
-      // CHANGE THIS URL to your deployed server URL or localhost during testing
-      const serverUrl = 'https://e6744cd9-db65-42d6-a719-7049351eea56-00-5x6b7ujq4vwz.sisko.replit.dev/';
-
-      fetch(serverUrl + 'send-message', {
+      // Use relative URL to work with current deployment
+      fetch('/send-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: note }),
