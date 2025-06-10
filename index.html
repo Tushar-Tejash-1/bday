@@ -389,11 +389,31 @@
           });
         };
         
-        // Check if audio file exists before trying to play
-        audio.addEventListener('canplaythrough', playAudio);
-        audio.addEventListener('error', (e) => {
-          console.log('Audio file not found or failed to load:', e);
+        // Test if audio file exists
+        fetch('joji.mp3')
+          .then(response => {
+            if (response.ok) {
+              console.log('Audio file found!');
+            } else {
+              console.error('Audio file not found - response status:', response.status);
+            }
+          })
+          .catch(error => console.error('Error checking audio file:', error));
+
+        // Add more detailed audio debugging
+        audio.addEventListener('loadstart', () => console.log('Audio: Load started'));
+        audio.addEventListener('loadeddata', () => console.log('Audio: Data loaded'));
+        audio.addEventListener('canplaythrough', () => {
+          console.log('Audio: Can play through');
+          playAudio();
         });
+        audio.addEventListener('error', (e) => {
+          console.error('Audio error:', e);
+          console.error('Audio error details:', audio.error);
+        });
+        
+        // Try to load the audio
+        audio.load();
       }, 600);
     }
 
